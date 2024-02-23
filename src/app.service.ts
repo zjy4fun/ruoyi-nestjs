@@ -5,4 +5,7 @@ export class AppService {
   getHello(): string {
     return 'Hello World!';
   }
+  getList(): number[] {
+    return [1, 2, 3];
+  }
 }
