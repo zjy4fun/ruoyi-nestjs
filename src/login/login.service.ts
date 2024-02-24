@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { LoginDto } from './login.controller';
+import { LoginDto } from './LoginDto';
+import { TokenService } from './token.service';
 
 @Injectable()
 export class LoginService {
-  // TODO 生成 token
+  constructor(private readonly tokenService: TokenService) {}
   login(loginDto: LoginDto): string {
-    console.log(loginDto);
-    return 'login';
+    return this.tokenService.createToken(loginDto);
   }
 }
