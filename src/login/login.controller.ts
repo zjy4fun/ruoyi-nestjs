@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { LoginService } from './login.service';
 import { ApiTags } from '@nestjs/swagger';
 import { LoginDto } from './LoginDto';
@@ -11,5 +11,10 @@ export class LoginController {
   @Post('/login')
   login(@Body() loginDto: LoginDto): string {
     return this.loginService.login(loginDto);
+  }
+
+  @Get('/captchaImage')
+  getCode(@Res() res: any) {
+    return this.loginService.getCode(res);
   }
 }
