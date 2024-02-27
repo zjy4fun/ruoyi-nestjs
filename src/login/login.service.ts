@@ -11,7 +11,7 @@ export class LoginService {
     return this.tokenService.createToken(loginDto);
   }
 
-  getCode(res: any) {
+  getCode(res: any): AjaxResult {
     const captcha = svgCaptcha.create({
       size: 4,
       fontSize: 50,
@@ -21,6 +21,6 @@ export class LoginService {
     });
     res.type('svg');
     const ajaxResult = new AjaxResult(200, '获取验证码成功', captcha.data);
-    res.status(200).send(ajaxResult);
+    return ajaxResult;
   }
 }
