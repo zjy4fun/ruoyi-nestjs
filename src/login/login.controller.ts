@@ -2,7 +2,6 @@ import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { LoginService } from './login.service';
 import { ApiTags } from '@nestjs/swagger';
 import { LoginDto } from './LoginDto';
-import { AjaxResult } from './AjaxResult';
 
 @ApiTags('login')
 @Controller()
@@ -15,7 +14,8 @@ export class LoginController {
   }
 
   @Get('/captchaImage')
-  getCode(@Res() res: any): AjaxResult {
-    return this.loginService.getCode(res);
+  getCode(@Res() res: any) {
+    const ajaxResult = this.loginService.getCode();
+    res.send(ajaxResult);
   }
 }

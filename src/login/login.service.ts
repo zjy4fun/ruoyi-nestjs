@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { LoginDto } from './LoginDto';
 import { TokenService } from './token.service';
 import * as svgCaptcha from 'svg-captcha';
-import { AjaxResult } from './AjaxResult';
+import { AjaxResult } from '../domain/AjaxResult';
 
 @Injectable()
 export class LoginService {
@@ -11,7 +11,7 @@ export class LoginService {
     return this.tokenService.createToken(loginDto);
   }
 
-  getCode(res: any): AjaxResult {
+  getCode(): AjaxResult {
     const captcha = svgCaptcha.create({
       size: 4,
       fontSize: 50,
@@ -19,7 +19,6 @@ export class LoginService {
       height: 40,
       background: '#f60',
     });
-    res.type('svg');
     const ajaxResult = new AjaxResult(200, '获取验证码成功', captcha.data);
     return ajaxResult;
   }
