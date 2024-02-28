@@ -1,0 +1,26 @@
+services:
+  mysql:
+    container_name: ruoyi-mysql
+    image: arm64v8/mysql   # apple m1
+#    image: mysql:5.7      # x86
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    environment:
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=123456
+      - MYSQL_DATABASE=ry-vue
+      - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - /Users/z/a/RuoYi-Vue-fast/env/mysql/mydir:/mydir
+      - /Users/z/a/RuoYi-Vue-fast/env/mysql/datadir:/var/lib/mysql
+      - /Users/z/a/RuoYi-Vue-fast/env/mysql/conf/my.cnf:/etc/my.cnf
+      - /Users/z/a/RuoYi-Vue-fast/env/mysql/source:/docker-entrypoint-initdb.d
+  cache:
+    container_name: ruoyi-redis
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
